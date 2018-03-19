@@ -4,7 +4,8 @@
 docker pull alpine/git
 
 # Add git user
-useradd git -G docker -m -s /bin/bash
+useradd git -m -s /bin/bash
+usermod -aG docker git
 cd /home/git
 
 # Copy ssh authorized_keys
