@@ -4,6 +4,10 @@
 #<UDF name="user_password" Label="User password" example="User password" />
 #<UDF name="pubkey" Label="SSH pubkey (installed for root and sudo user)?" example="ssh-rsa ..." />
 
+# Add new user
+useradd "$USER_NAME"
+echo "$USER_PASSWORD" | passwd --stdin "$USER_NAME"
+
 # Set up ssh pubkey
 echo Setting up ssh pubkey...
 mkdir -p /root/.ssh
@@ -15,13 +19,11 @@ echo ...done
 echo Disabling password login over ssh...
 sed -i -e "s/PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
 sed -i -e "s/#PasswordAuthentication no/PasswordAuthentication no/" /etc/ssh/sshd_config
+echo "Match User $USER_NAME" >> /etc/ssh/sshd_config
+echo "  PasswordAuthentication yes" >> /etc/ssh/sshd_config
 echo Restarting sshd...
 systemctl restart sshd
 echo ...done
-
-# Add new user
-useradd "$USER_NAME"
-echo "$USER_PASSWORD" | passwd --stdin "$USER_NAME"
 
 # Initial needfuls
 yum update -y

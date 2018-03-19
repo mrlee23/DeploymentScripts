@@ -8,8 +8,8 @@ You can search the scripts in [StackScript library](https://www.linode.com/stack
 
 This codes from [linux-deployment-scripts](https://github.com/mb243/linux-deployment-scripts/blob/master/Docker/CentOS_7.sh).
 
-- Disabled root login in ssh
-- Add new user
+- Disabled root login with password from ssh
+- Add new user(allowed login with password from ssh)
 - Initial EPEL
 - Automatic updates
 - Install fail2ban to defense the brute force authenitication attempts
