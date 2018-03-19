@@ -14,4 +14,4 @@ cp ~/.ssh/authorized_keys .ssh/
 chown -R git:docker .ssh
 
 # Make the git command using docker
-echo "alias git=\"docker run -ti --rm -v $(pwd):/git -v $HOME/.ssh:/root/.ssh alpine/git\"" >> .bash_profile
+echo "alias git=\"docker run -ti --rm --user `id -u`:`id -g` -v $(pwd):/git -v $HOME/.ssh:/root/.ssh alpine/git\"" >> .bash_profile
